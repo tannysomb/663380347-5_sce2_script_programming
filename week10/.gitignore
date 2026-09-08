@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python/
+env/
+venv/
+.ipynb_checkpoints/
+.vscode/
+
+# Environment
+.env
+
+# Pipenv
+.venv/
+
+# Generated output file
+data/output_sales_report.xlsx
