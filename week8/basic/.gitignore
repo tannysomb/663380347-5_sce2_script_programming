@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python/
+env/
+venv/
+.ipynb_checkpoints/
+.vscode/
+
+# Environment
+.env
+
+# Pipenv
+.venv/
+
+# Generated Data Files
+data/output_filtered_sales.csv
+data/output_updated_inventory.json

@@ -1,0 +1,32 @@
+# data-processor/src/utils.py
+import logging
+import os
+
+# Configure basic logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+def setup_logging(name, level=logging.INFO):
+    """Sets up a logger for specific modules."""
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    # ไม่ส่งข้อความต่อขึ้นไปให้ root logger (ที่ถูกตั้งค่าไว้แล้วโดย basicConfig)
+    # มิฉะนั้นข้อความเดียวกันจะถูกพิมพ์ซ้ำ 2 ครั้ง: ครั้งหนึ่งจาก handler ของ logger ตัวนี้
+    # และอีกครั้งจาก handler ของ root logger
+    logger.propagate = False
+    if not logger.handlers:  # Prevent adding multiple handlers if called multiple times
+        ch = logging.StreamHandler()
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+    return logger
+
+
+def ensure_directory_exists(path):
+    """Ensures that a directory exists, creating it if necessary."""
+    try:
+        os.makedirs(path, exist_ok=True)
+        logging.info(f"Directory ensured: {path}")
+    except OSError as e:
+        logging.error(f"Error creating directory {path}: {e}")
+        raise
